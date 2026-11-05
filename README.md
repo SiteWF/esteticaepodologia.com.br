@@ -1,5 +1,7 @@
-# Estética & Podologia — versão moderna
+# Estetica & Podologia
 
-Cópia independente da versão original. Arquivos do site em dist. Abra dist/index.html.
+Site estatico de esteticaepodologia.com.br.
 
-O projeto original em ../estetica-podologia foi preservado. Esta versão não herda a identidade de publicação do Sites nem o repositório Git anterior.
+Implante a branch main diretamente em public_html: index.html, CSS, JavaScript e assets ficam na raiz do repositorio. Nao requer compilacao.
+
+A pasta dist local e apenas uma copia de preview e nao e enviada ao GitHub. As alteracoes destinadas a publicacao devem ser feitas nos arquivos da raiz.

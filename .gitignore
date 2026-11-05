@@ -4,3 +4,9 @@ node_modules/
 !.env.example
 tmp/
 *.zip
+
+# Copia local de preview e documentos internos
+dist/
+tools/
+PUBLICACAO-SEO.md
+REVISAO-LEGAL-PENDENTE.md

@@ -25,3 +25,9 @@ body.modern-edition{--ink:#24382d;--green:#344e3e;--cream:#f8f8f0;--muted:#65756
 @media(min-width:1800px){.modern-edition .section{padding-inline:max(7%,calc((100vw - 1480px)/2))}}
 @media(max-width:1100px){.modern-edition nav{gap:17px}.modern-edition .hero-copy{width:85%!important}.hero-side-note{display:none}.modern-edition .treatment-card{padding:21px}}
 @media(max-width:700px){.modern-edition header{height:76px;padding-inline:5%}.modern-edition header .official-brand{width:140px;height:68px}.modern-edition header nav{top:76px;background:#f8f8f0}.modern-edition .cinematic-hero{height:calc(100svh - 76px)!important;min-height:620px!important}.modern-edition .hero-copy{width:100%!important;padding:65px 7% 95px!important}.modern-edition .hero-copy h1{font-size:49px;letter-spacing:-1.8px}.modern-edition .hero-copy>p{font-size:13px;max-width:320px}.modern-edition .cinema-shade{background:linear-gradient(90deg,#16291ee8,#203326aa)}.modern-edition .section{padding:65px 6%}.modern-edition h2{font-size:36px}.modern-edition .ribbon{gap:12px;font-size:8px}.modern-edition .treatment-grid{grid-template-columns:1fr}.modern-edition .about-photo{height:390px}.modern-edition .info-service-card{padding:27px}.modern-edition .media-cover{height:360px}.modern-edition .quote{font-size:24px}.modern-edition .price-list{padding:22px}.modern-edition .section-head{margin-bottom:30px}.modern-edition .contact h2{font-size:36px}}
+
+/* Visible first paint, independent of video readiness and scripts. */
+.modern-edition .scroll-scene{height:auto}
+.modern-edition .cinematic-hero{position:relative;background:#23382c url('assets/spa-poster.jpg') center/cover no-repeat}
+.modern-edition .hero-copy{opacity:1;transform:none}
+@media(max-width:700px),(hover:none){.modern-edition .reveal-ready{opacity:1;transform:none;transition:none}}

@@ -1,0 +1,12 @@
+DirectoryIndex index.html
+Options -Indexes
+
+# Impede acesso web aos metadados do Git e arquivos internos.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule (^|/)\.git(?:/|$) - [F,L]
+RewriteRule ^(?:tools|dist)/ - [F,L]
+</IfModule>
+<FilesMatch "(?i)^(?:\.gitignore|README\.md|PUBLICACAO-SEO\.md|REVISAO-LEGAL-PENDENTE\.md)$">
+Require all denied
+</FilesMatch>
