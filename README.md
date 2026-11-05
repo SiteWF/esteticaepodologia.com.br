@@ -1,5 +1,3 @@
-# Modelo 03 — Atelier
+# Estetica & Podologia — Atelier autoral
 
-Copia independente com fotos como marca d agua entre secoes. Abra index.html.
-
-As versoes original e moderna foram preservadas.
+Site estatico pronto para implantacao na raiz public_html. Fotografias suaves entre os blocos e video silencioso controlado por movimento vertical e rolagem.

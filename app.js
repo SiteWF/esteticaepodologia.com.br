@@ -6,11 +6,22 @@ const descriptions={'Estética facial':'Conheça nossa proposta de atenção à 
 
 
 
-// Movimento ativado por solicitação do proprietário: mouse e toque.
-(()=>{const video=document.querySelector('#spa-scroll'),scene=document.querySelector('.scroll-scene');if(!video||!scene)return;const hero=video.parentElement;let target=0,frame=0;const clamp=n=>Math.max(0,Math.min(1,n));scene.classList.add('mouse-scene');scene.classList.remove('motion-off');scene.style.setProperty('--intro-opacity',1);scene.style.setProperty('--chapter-opacity',0);scene.style.setProperty('--intro-y','0px');const cue=scene.querySelector('.scroll-cue');if(cue)cue.textContent='Mova o mouse para baixo para explorar ↓';video.muted=true;video.preload='none';function seek(){frame=0;if(!Number.isFinite(video.duration)||video.readyState<2||video.seeking)return;const t=target*Math.max(0,video.duration-.04);if(Math.abs(video.currentTime-t)>.025)video.currentTime=t;scene.style.setProperty('--scene-progress',target)}function request(){if(!frame)frame=requestAnimationFrame(seek)}function move(e){const r=hero.getBoundingClientRect();target=clamp((e.clientY-r.top)/r.height);request()}hero.addEventListener('pointermove',move,{passive:true});hero.addEventListener('mousemove',move,{passive:true});video.addEventListener('loadeddata',request);video.addEventListener('seeked',request);video.addEventListener('canplay',request);window.addEventListener('scroll',()=>{if(matchMedia('(pointer: coarse)').matches){const r=hero.getBoundingClientRect();target=clamp(-r.top/Math.max(1,r.height));request()}},{passive:true});const mobile=matchMedia('(max-width:700px), (pointer:coarse)').matches;
-if(mobile&&cue)cue.textContent='Role para conhecer nossos cuidados ↓';
-let started=false;function startVideo(){if(started)return;started=true;const source=video.querySelector('source');source.src=mobile?'assets/spa-mobile.mp4':source.dataset.src;video.preload='auto';video.load()}
-if(!navigator.connection?.saveData){if(mobile){window.addEventListener('pointerdown',startVideo,{once:true,passive:true});window.addEventListener('scroll',startVideo,{once:true,passive:true})}else{requestAnimationFrame(()=>requestAnimationFrame(startVideo))}}
+// Video silencioso: movimento vertical do mouse e rolagem em qualquer tela.
+(()=>{
+ const video=document.querySelector('#spa-scroll'),scene=document.querySelector('.scroll-scene');if(!video||!scene)return;
+ const hero=video.parentElement,source=video.querySelector('source'),mobile=matchMedia('(max-width:700px), (pointer:coarse)').matches;
+ let target=0,frame=0,started=false;const clamp=n=>Math.max(0,Math.min(1,n));
+ scene.classList.add('mouse-scene');scene.classList.remove('motion-off');
+ const cue=scene.querySelector('.scroll-cue');if(cue)cue.textContent=mobile?'Role para explorar ↓':'Mova o mouse para cima e para baixo ou role ↓';
+ video.muted=true;video.defaultMuted=true;video.playsInline=true;
+ function seek(){frame=0;if(!Number.isFinite(video.duration)||video.readyState<1||video.seeking)return;const time=target*Math.max(0,video.duration-.08);if(Math.abs(video.currentTime-time)>.035)video.currentTime=time;scene.style.setProperty('--scene-progress',target)}
+ function request(){if(!frame)frame=requestAnimationFrame(seek)}
+ function start(){if(started)return;started=true;source.src=mobile?'assets/spa-mobile.mp4':source.dataset.src;video.preload='auto';video.load()}
+ hero.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;start();const r=hero.getBoundingClientRect();target=clamp((e.clientY-r.top)/Math.max(1,r.height));request()},{passive:true});
+ hero.addEventListener('pointerdown',()=>{start();request()},{passive:true});
+ window.addEventListener('scroll',()=>{const r=hero.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;start();target=clamp((scrollY-scene.offsetTop)/Math.max(1,r.height*.85));request()},{passive:true});
+ ['loadedmetadata','loadeddata','canplay','seeked'].forEach(event=>video.addEventListener(event,request));
+ requestAnimationFrame(()=>requestAnimationFrame(start));
 })();
 
 // Entrada única por seção; o conteúdo permanece acessível sem JavaScript.
